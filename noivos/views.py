@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Presentes
+from .models import Presentes, Convidados
 
 # Create your views here.
 def home(request):
@@ -26,3 +26,22 @@ def home(request):
         presentes.save()
 
         return redirect('home')
+    
+def lista_convidados(request):
+    if request.method == 'GET':
+        convidados = Convidados.objects.all()
+        return render(request, 'lista_convidados.html', {'convidados': convidados})
+    elif request.method == 'POST':
+        nome_convidado = request.POST.get('nome_convidado')
+        Whatsapp = request.POST.get('whatsapp')
+        maximo_acompanhantes = int(request.POST.get('maximo_acompanhantes'))
+
+        convidados = Convidados(
+            nome_convidado= nome_convidado,
+            whatsapp = Whatsapp,
+            maximo_acompanhantes = maximo_acompanhantes
+        )
+
+        convidados.save()
+
+        return redirect('lista_convidados')
