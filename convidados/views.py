@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from noivos.models import Convidados, Presentes
 
@@ -8,3 +8,17 @@ def convidados(request):
     convidado = Convidados.objects.get(token=token)
     presentes = Presentes.objects.filter(reservado=False).order_by('-importancia')
     return render(request, 'convidados.html', {'convidado': convidado, 'presentes': presentes})
+
+def responder_presenca(request):
+    resposta = request.GET.get('resposta')
+    token = request.GET.get('token')
+    convidados = Convidados.objects.get(token=token)
+
+    if resposta not in ['C', 'R']:
+        return redirect(f'/convidados/?token={token}')
+    
+    convidados.status = resposta
+    convidados.save()
+
+
+    return redirect(f'/convidados/?token={token}')

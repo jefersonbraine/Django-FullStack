@@ -6,8 +6,13 @@
 
             <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Olá, {{convidado.nome_convidado}}</h2>
             
+            {% if convidado.status == 'AC' %}
+                <p class="mt-2 text-lg leading-8 text-gray-600">Confirme sua presença no casamento: <a href="{% url 'responder_presenca' %}?resposta=C&token={{convidado.token}}" class="text-green-400">confirmar</a>, <a href="{% url 'responder_presenca' %}?resposta=R&token={{convidado.token}}" class="text-red-400">recusar</a></p>
+            {% endif %}
+
             
-            <p class="mt-2 text-lg leading-8 text-gray-600">Confirme sua presença no casamento: <a href="" class="text-green-400">confirmar</a>, <a href="" class="text-red-400">recusar</a></p>
+            
+            
        
         </div>
         <br>
