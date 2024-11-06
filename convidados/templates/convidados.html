@@ -9,12 +9,7 @@
             {% if convidado.status == 'AC' %}
                 <p class="mt-2 text-lg leading-8 text-gray-600">Confirme sua presença no casamento: <a href="{% url 'responder_presenca' %}?resposta=C&token={{convidado.token}}" class="text-green-400">confirmar</a>, <a href="{% url 'responder_presenca' %}?resposta=R&token={{convidado.token}}" class="text-red-400">recusar</a></p>
             {% endif %}
-
-            
-            
-            
-       
-        </div>
+ </div>
         <br>
         <hr>
 
@@ -47,7 +42,7 @@
                             </span>
                             {% endif %}
 
-                            <a href="" class="rounded-md block w-full mt-4 bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 cursor-pointer">Reservar</a>
+                            <a href="/convidados/reservar_presente/{{presente.id}}?token={{convidado.token}}" class="rounded-md block w-full mt-4 bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 cursor-pointer">Reservar</a>
 
                             
                             

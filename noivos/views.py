@@ -6,7 +6,11 @@ from .models import Presentes, Convidados
 def home(request):
     if request.method == "GET":
         presentes = Presentes.objects.all()
-        return render(request, 'home.html', {'presentes': presentes})
+        nao_reservado = Presentes.objects.filter(reservado=False).count()
+        reservado = Presentes.objects.filter(reservado=True).count()
+        data= [nao_reservado, reservado]
+
+        return render(request, 'home.html', {'presentes': presentes, 'data': data})
     elif request.method == "POST":
         nome_presente = request.POST.get('nome_presente')
         preco = request.POST.get('preco')
